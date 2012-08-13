@@ -1,10 +1,10 @@
 package cc.rjl.dinero;
 
-class Binding<T> {
+class Binding {
     private boolean shouldReturnTarget = true;
     private Object target;
 
-    Binding(T target) {
+    Binding(Object target) {
         this.target = target;
     }
 
