@@ -2,7 +2,7 @@ package cc.rjl.dinero;
 
 import java.util.*;
 
-public class Dinero {
+public class $ {
     public static <T> Collection<T> $(Iterable<T> input) {
         return execute(input, new CollectionReducer());
     }
@@ -41,7 +41,7 @@ public class Dinero {
 
     private static <I, O> O execute(Iterable input, Reducer<I, O> reducer, Op... operations) {
         for(Object current : input) {
-            OpBinding binding = new OpBinding(current);
+            Binding binding = new Binding(current);
 
             for(Op operation : operations)
                 if(!operation.execute(binding)) break;

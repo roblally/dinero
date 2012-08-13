@@ -3,7 +3,7 @@ package cc.rjl.test.dinero;
 import cc.rjl.dinero.*;
 import static cc.rjl.dinero.Predicate.Util.*;
 
-public class OpUtils {
+class OpUtils {
     static F1<Integer, Integer> add1() {
         return new F1<Integer, Integer>() {
             public Integer apply(Integer integer) {

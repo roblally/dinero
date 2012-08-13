@@ -3,12 +3,12 @@ package cc.rjl.test.dinero;
 import cc.rjl.dinero.*;
 import java.util.Set;
 import org.junit.*;
+import static cc.rjl.dinero.$.*;
 import static cc.rjl.test.dinero.Collections.*;
-import static cc.rjl.dinero.Dinero.*;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
-public class DineroTest {
+public class $Test {
     private Iterable<String> listOfStrings;
     private Iterable<Integer> listOfIntegers;
 
@@ -27,7 +27,7 @@ public class DineroTest {
 
     @Test public void selectFiltersTarget() {
         assertThat(
-                Dinero.$(listOfStrings,
+                $(listOfStrings,
                         select(OpUtils.isNotB())),
                 is(iterable("A", "C")));
     }
@@ -42,7 +42,7 @@ public class DineroTest {
 
     @Test public void rejectFiltersTarget() {
         assertThat(
-                Dinero.$(listOfStrings,
+                $(listOfStrings,
                         reject(OpUtils.isB())),
                 is(iterable("A", "C")));
     }
@@ -65,21 +65,21 @@ public class DineroTest {
 
     @Test public void operationsAreNotLimitedToStrings() {
         assertThat(
-                Dinero.$(listOfIntegers,
+                $(listOfIntegers,
                         select(OpUtils.alwaysTrue())),
                 is(listOfIntegers));
     }
 
     @Test public void collectTransformsInputToOutput() {
         assertThat(
-                Dinero.$(listOfIntegers,
+                $(listOfIntegers,
                         collect(OpUtils.doubleValue())),
                 is(iterable(2, 4, 6)));
     }
 
     @Test public void collectCanTransformType() {
         assertThat(
-                Dinero.$(listOfIntegers,
+                $(listOfIntegers,
                         collect(OpUtils.convertToString())),
                 is(iterable("1", "2", "3")));
     }
@@ -129,7 +129,7 @@ public class DineroTest {
     @Test public void setOperationReturnsSet() {
         Set<Integer> out =
                 $(iterable(1, 1, 2, 2, 3, 3),
-                        Dinero.<Integer>asSet());
+                        $.<Integer>asSet());
 
         assertThat(out, is(set(1, 2, 3)));
     }
