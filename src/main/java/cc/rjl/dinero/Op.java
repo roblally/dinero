@@ -1,13 +1,7 @@
 package cc.rjl.dinero;
 
-import java.util.*;
-
-public abstract class Op<In, Out> {
+public abstract class Op<I, O> {
     abstract boolean execute(OpBinding x);
-
-    Collection createReturnType() {
-        return new ArrayList();
-    }
 
     abstract static class Filter<T> extends Op<T, T> {
         abstract boolean include(T target);

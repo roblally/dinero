@@ -1,4 +1,4 @@
-package cc.rjl.dinero;
+package cc.rjl.test.dinero;
 
 import java.util.Iterator;
 

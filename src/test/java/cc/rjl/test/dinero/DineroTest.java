@@ -1,9 +1,9 @@
-package cc.rjl.dinero;
+package cc.rjl.test.dinero;
 
+import cc.rjl.dinero.*;
 import java.util.Set;
 import org.junit.*;
-import static cc.rjl.dinero.Collections.*;
-import static cc.rjl.dinero.OpUtils.*;
+import static cc.rjl.test.dinero.Collections.*;
 import static cc.rjl.dinero.Dinero.*;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
@@ -27,78 +27,78 @@ public class DineroTest {
 
     @Test public void selectFiltersTarget() {
         assertThat(
-                $(listOfStrings,
-                        select(isNotB())),
+                Dinero.$(listOfStrings,
+                        select(OpUtils.isNotB())),
                 is(iterable("A", "C")));
     }
 
     @Test public void multipleSelectsFilterTarget() {
         assertThat(
                 $(listOfStrings,
-                        select(isNotB()),
-                        select(isNotC())),
+                        select(OpUtils.isNotB()),
+                        select(OpUtils.isNotC())),
                 is(iterable("A")));
     }
 
     @Test public void rejectFiltersTarget() {
         assertThat(
-                $(listOfStrings,
-                        reject(isB())),
+                Dinero.$(listOfStrings,
+                        reject(OpUtils.isB())),
                 is(iterable("A", "C")));
     }
 
     @Test public void combiningSelectAndReject() {
         assertThat(
                 $(listOfStrings,
-                        reject(isB()),
-                        select(isNotC())),
+                        reject(OpUtils.isB()),
+                        select(OpUtils.isNotC())),
                 is(iterable("A")));
     }
 
     @Test public void itemsFilteredByEarlierOperationsAreNotPassedToLaterOperations() {
         assertThat(
                 $(listOfStrings,
-                        select(alwaysFalse()),
-                        select(alwaysThrow())),
+                        select(OpUtils.alwaysFalse()),
+                        select(OpUtils.alwaysThrow())),
                 is(Collections.<String>empty()));
     }
 
     @Test public void operationsAreNotLimitedToStrings() {
         assertThat(
-                $(listOfIntegers,
-                        select(alwaysTrue())),
+                Dinero.$(listOfIntegers,
+                        select(OpUtils.alwaysTrue())),
                 is(listOfIntegers));
     }
 
     @Test public void collectTransformsInputToOutput() {
         assertThat(
-                $(listOfIntegers,
-                        collect(doubleValue())),
+                Dinero.$(listOfIntegers,
+                        collect(OpUtils.doubleValue())),
                 is(iterable(2, 4, 6)));
     }
 
     @Test public void collectCanTransformType() {
         assertThat(
-                $(listOfIntegers,
-                        collect(convertToString())),
+                Dinero.$(listOfIntegers,
+                        collect(OpUtils.convertToString())),
                 is(iterable("1", "2", "3")));
     }
 
     @Test public void multipleCollectsCanBeIncluded() {
         assertThat(
                 $(listOfIntegers,
-                        collect(doubleValue()),
-                        collect(convertToString())),
+                        collect(OpUtils.doubleValue()),
+                        collect(OpUtils.convertToString())),
                 is(iterable("2", "4", "6")));
     }
 
     @Test public void filterOperationsAndTransformOperationsCanBeInterleaved() {
         assertThat(
                 $(listOfIntegers,
-                        collect(doubleValue()),
-                        reject(is2()),
-                        collect(convertToString()),
-                        reject(is4())),
+                        collect(OpUtils.doubleValue()),
+                        reject(OpUtils.is2()),
+                        collect(OpUtils.convertToString()),
+                        reject(OpUtils.is4())),
                 is(iterable("6")));
     }
 
@@ -137,58 +137,58 @@ public class DineroTest {
     @Test public void checkAllAritiesUpToTwentyArePresent() {
         assertThat(
                 $(iterable(0),
-                        collect(add1())),
+                        collect(OpUtils.add1())),
                 is(iterable(1)));
 
         assertThat(
                 $(iterable(0),
-                        collect(add1()),
-                        collect(add1())),
+                        collect(OpUtils.add1()),
+                        collect(OpUtils.add1())),
                 is(iterable(2)));
 
         assertThat(
                 $(iterable(0),
-                        collect(add1()),
-                        collect(add1()),
-                        collect(add1())),
+                        collect(OpUtils.add1()),
+                        collect(OpUtils.add1()),
+                        collect(OpUtils.add1())),
                 is(iterable(3)));
 
         assertThat(
                 $(iterable(0),
-                        collect(add1()),
-                        collect(add1()),
-                        collect(add1()),
-                        collect(add1())),
+                        collect(OpUtils.add1()),
+                        collect(OpUtils.add1()),
+                        collect(OpUtils.add1()),
+                        collect(OpUtils.add1())),
                 is(iterable(4)));
 
         assertThat(
                 $(iterable(0),
-                        collect(add1()),
-                        collect(add1()),
-                        collect(add1()),
-                        collect(add1()),
-                        collect(add1())),
+                        collect(OpUtils.add1()),
+                        collect(OpUtils.add1()),
+                        collect(OpUtils.add1()),
+                        collect(OpUtils.add1()),
+                        collect(OpUtils.add1())),
                 is(iterable(5)));
 
         assertThat(
                 $(iterable(0),
-                        collect(add1()),
-                        collect(add1()),
-                        collect(add1()),
-                        collect(add1()),
-                        collect(add1()),
-                        collect(add1())),
+                        collect(OpUtils.add1()),
+                        collect(OpUtils.add1()),
+                        collect(OpUtils.add1()),
+                        collect(OpUtils.add1()),
+                        collect(OpUtils.add1()),
+                        collect(OpUtils.add1())),
                 is(iterable(6)));
 
         assertThat(
                 $(iterable(0),
-                        collect(add1()),
-                        collect(add1()),
-                        collect(add1()),
-                        collect(add1()),
-                        collect(add1()),
-                        collect(add1()),
-                        collect(add1())),
+                        collect(OpUtils.add1()),
+                        collect(OpUtils.add1()),
+                        collect(OpUtils.add1()),
+                        collect(OpUtils.add1()),
+                        collect(OpUtils.add1()),
+                        collect(OpUtils.add1()),
+                        collect(OpUtils.add1())),
                 is(iterable(7)));
 
         //TODO... keep typing

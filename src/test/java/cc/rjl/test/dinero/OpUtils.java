@@ -1,5 +1,6 @@
-package cc.rjl.dinero;
+package cc.rjl.test.dinero;
 
+import cc.rjl.dinero.*;
 import static cc.rjl.dinero.Predicate.Util.*;
 
 public class OpUtils {
